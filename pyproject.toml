@@ -1,0 +1,71 @@
+[project]
+name = "template-py"
+version = "0.1.0"
+description = "Python template"
+license = "MIT-0"
+readme = "README.md"
+authors = [{ name = "your name", email = "your_name@example.com" }]
+requires-python = ">=3.11.8"
+dependencies = [
+    "pydantic>=2.11.9",
+    "pydantic-settings>=2.10.1",
+    "structlog>=25.4.0",
+]
+
+[dependency-groups]
+dev = ["pip-audit>=2.9.0", "pyright>=1.1.405", "pytest>=8.4.2", "ruff>=0.13.0"]
+
+# See https://docs.astral.sh/uv/concepts/build-backend/#choosing-a-build-backend
+[build-system]
+requires = ["uv_build>=0.8.20,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+# Mitigate supply chain attacks by excluding too new packages.
+# https://docs.astral.sh/uv/reference/settings/#exclude-newer
+exclude-newer = "2025-09-18T00:00:00Z"
+
+[tool.pyright]
+# Explicitly set the type checking mode to "standard" for compatibility with Pylance.
+# https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+typeCheckingMode = "standard"
+
+# Default ruff configuration: https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+# allow the line length to be a bit longer to accommodate modern screens
+line-length = 120
+# To lint or format notebooks, uncomment the following lines.
+# extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# Copied from https://docs.astral.sh/ruff/linter/#rule-selection
+# and extended with pytest-style (PT) recommended in https://docs.pytest.org/en/8.3.x/explanation/goodpractices.html#checking-with-flake8-pytest-style
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # flake8-pytest-style
+    "PT",
+]
+
+# Disable rules that conflict with format
+# ref. https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+ignore = ["E111", "E114", "E117"]
+
+[tool.ruff.format]
+# It is planned for this to be opt-out in the future.
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+# https://docs.pytest.org/en/8.3.x/explanation/goodpractices.html#choosing-an-import-mode
+addopts = "--import-mode=importlib"
