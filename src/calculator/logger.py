@@ -3,7 +3,7 @@ import sys
 import structlog
 from structlog.typing import FilteringBoundLogger, Processor
 
-from template_py.config import settings
+from calculator.config import settings
 
 # default value: https://www.structlog.org/en/25.4.0/getting-started.html#your-first-log-entry
 _shared_processors: list[Processor] = [

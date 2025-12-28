@@ -1,4 +1,4 @@
-from template_py.add import add
+from calculator.add import add
 
 
 def test_add():

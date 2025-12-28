@@ -1,5 +1,5 @@
-from template_py.add import add
-from template_py.logger import logger
+from calculator.add import add
+from calculator.logger import logger
 
 
 def main() -> None:
