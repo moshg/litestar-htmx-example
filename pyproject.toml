@@ -7,16 +7,20 @@ readme = "README.md"
 requires-python = ">=3.11.8"
 dependencies = [
     "jinja2>=3.1.6",
-    "litestar[standard]>=2.12.1",
-    "pydantic>=2.11.9",
-    "pydantic-settings>=2.10.1",
-    "sniffio>=1.3.1",
-    "structlog>=25.4.0",
+    "litestar[standard]>=2.19.0",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.12.0",
+    "structlog>=25.5.0",
     "uvicorn>=0.38.0",
 ]
 
 [dependency-groups]
-dev = ["pip-audit>=2.9.0", "pyright>=1.1.405", "pytest>=8.4.2", "ruff>=0.13.0"]
+dev = [
+    "pip-audit>=2.10.0",
+    "pyright>=1.1.407",
+    "pytest>=9.0.2",
+    "ruff>=0.14.10",
+]
 
 # See https://docs.astral.sh/uv/concepts/build-backend/#choosing-a-build-backend
 [build-system]
