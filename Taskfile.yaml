@@ -1,10 +1,10 @@
 version: '3'
 
 tasks:
-  start:
-    desc: Run the Litestar server
+  dev:
+    desc: Run the dev server
     cmds:
-      - uv run litestar --app calculator.main:app run --port 8000
+      - uv run litestar --app calculator.main:app run --reload --port 8000
   check:
     desc: Check code quality (typecheck + lint)
     deps:
