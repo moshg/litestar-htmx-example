@@ -31,12 +31,14 @@ async def calculate(
             result = lhs * rhs
         case "divide":
             if rhs == 0:
-                return "Error: Division by zero"
+                return """<span class="text-red-500">Error</span>
+<div id="error-message" hx-swap-oob="innerHTML">Zero division error</div>"""
             result = lhs / rhs
 
-    if result == int(result):
-        return str(int(result))
-    return str(result)
+    result_str = str(int(result)) if result == int(result) else str(result)
+
+    return f"""{result_str}
+<div id="error-message" hx-swap-oob="innerHTML"></div>"""
 
 
 app = Litestar(
