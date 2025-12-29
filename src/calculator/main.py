@@ -1,13 +1,46 @@
-from calculator.add import add
-from calculator.logger import logger
+from pathlib import Path
+from typing import Literal
+
+from litestar import Litestar, get
+from litestar.contrib.jinja import JinjaTemplateEngine
+from litestar.response import Template
+from litestar.template.config import TemplateConfig
+
+TEMPLATES_DIR = Path(__file__).parent / "templates"
 
 
-def main() -> None:
-    logger.info("Starting main function")
-    s = add(1, 2)
-    print(f"Sum is {s}")
-    logger.info("Ending main function")
+@get("/")
+async def index() -> Template:
+    return Template(template_name="index.html")
 
 
-if __name__ == "__main__":
-    main()
+@get("/api/calculate")
+async def calculate(
+    a: float,
+    b: float,
+    operator: Literal["add", "subtract", "multiply", "divide"],
+) -> str:
+    match operator:
+        case "add":
+            result = a + b
+        case "subtract":
+            result = a - b
+        case "multiply":
+            result = a * b
+        case "divide":
+            if b == 0:
+                return "Error: Division by zero"
+            result = a / b
+
+    if result == int(result):
+        return str(int(result))
+    return str(result)
+
+
+app = Litestar(
+    route_handlers=[index, calculate],
+    template_config=TemplateConfig(
+        directory=TEMPLATES_DIR,
+        engine=JinjaTemplateEngine,
+    ),
+)

@@ -1,10 +1,10 @@
 version: '3'
 
 tasks:
-  run:
-    desc: Run the main script
+  start:
+    desc: Run the Litestar server
     cmds:
-      - uv run -m template_py.main
+      - uv run litestar --app calculator.main:app run --port 8000
   check:
     desc: Check code quality (typecheck + lint)
     deps:
