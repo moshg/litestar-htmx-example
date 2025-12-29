@@ -26,7 +26,7 @@
         <h1 class="text-4xl font-light text-slate-600 text-center mb-16 tracking-wide">Calculator</h1>
         <form hx-get="/api/calculate" hx-target="#result" hx-swap="innerHTML"
             class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8">
-            <input type="number" name="a" step="any"
+            <input type="number" name="lhs" step="any"
                 class="bg-transparent border-0 border-b-2 border-slate-300 focus:border-slate-500 focus:outline-none text-4xl sm:text-5xl text-center w-40 sm:w-48 py-2 placeholder-slate-300 transition-colors"
                 placeholder="0" required />
             <select name="operator"
@@ -36,7 +36,7 @@
                 <option value="multiply">×</option>
                 <option value="divide">÷</option>
             </select>
-            <input type="number" name="b" step="any"
+            <input type="number" name="rhs" step="any"
                 class="bg-transparent border-0 border-b-2 border-slate-300 focus:border-slate-500 focus:outline-none text-4xl sm:text-5xl text-center w-40 sm:w-48 py-2 placeholder-slate-300 transition-colors"
                 placeholder="0" required />
             <button type="submit"
